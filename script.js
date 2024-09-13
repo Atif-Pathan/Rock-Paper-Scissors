@@ -27,9 +27,10 @@ function getComputerChoice() {
 
 const winner = document.createElement("p");
 const playAgain = document.createElement("button");
+playAgain.textContent = "Play Again"
 const scores = document.querySelector(".scores")
 const roundResult = document.querySelector(".round-result");
-roundResult.textContent = "Are you Ready?.. Then, make you choice!"
+roundResult.textContent = "Are you Ready?.. Then, make you choice!";
 const displayScore = document.querySelector(".running-score");
 displayScore.textContent = `The current score is You[${humanScore}] - Computer[${computerScore}]`;
 
@@ -64,6 +65,9 @@ function checkScore() {
         }
         scores.appendChild(winner);
         scores.appendChild(playAgain);
+        setTimeout(() => {
+            roundResult.textContent = "";
+        }, 1000);
     }
 }
 
@@ -79,20 +83,24 @@ function playRound (humanChoice, computerChoice) {
         lose();
         computerScore++;
     }
+    setTimeout(() => {
+        roundResult.textContent = "Are you Ready?.. Then, make you choice!";
+    }, 1000);
     checkScore();
+    
 }
-
 
 function resetGame() {
     humanScore = 0;
     computerScore = 0;
     displayScore.textContent = `The current score is You[${humanScore}] - Computer[${computerScore}]`;
-
+    scores.removeChild(winner);
+    scores.removeChild(playAgain);
+    roundResult.textContent = "Are you Ready?.. Then, make you choice!"
 }
 
 const play = document.querySelector("#play");
 const interface = document.querySelector(".interface");
-// document.body.insertBefore(interface, play);
 
 const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
